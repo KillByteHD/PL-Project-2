@@ -14,8 +14,14 @@ all:
 
 	$(CC) ${FLAGS} $(SRC) -o $(OUT)
 
+# TODO: make install
+
 run: all
 	./$(OUT)
 
 clean:
 	rm -rf ${OUT}
+
+graph:
+	dot -Tpdf $(GRAPH).gv -o $(GRAPH).pdf
+#make graph GRAPH=graph1

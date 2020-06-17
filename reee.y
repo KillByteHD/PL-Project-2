@@ -4,19 +4,26 @@
 #include <stdlib.h>
 
     //char yylex();
-/* 
-"Peixe":(123 - Pescada - 4 - < Unidade - 1 >) 
-| "Cosmetica":(12345 - Sabao - 2 - < Unidade - 5 >) 
-, (1221 - Espuma - 3 - < Volume - 1 >)
-*/
 %}
 
 
-%token CODE ERROR
+%union{
+    char* str;
+}
+
+%token Subject PredicateAttrib PredicateRelation Object
 %%
-Coisas : CODE { puts("YEET"); }
-       | ERROR { puts("SAD YEET"); }
-       ;
+
+Line : Triplets '.'
+
+Triplets : Subject Predicate Object      { /* Codigo de adicionar esta informação ao hashmap */ }
+         | Triplets ',' Object            { /* Codigo de adicionar esta informação ao hashmap */ }
+         | Triplets ';' Predicate Object  { /* Codigo de adicionar esta informação ao hashmap */ }
+         ;
+
+Predicate : PredicateAttrib
+          | PredicateRelation
+          ;
 
 %%
 
@@ -30,8 +37,8 @@ int yyerror(char *s)
 
 int main()
 {
-    printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
+    printf("Begin!\n");
     yyparse();
-    printf("HEHEHEHEHEHEHEHEHEHEHEHEHEHEHEHEHEHEHEHEHEHEHEHEHEHE!\n");
+    printf("End!\n");
     return(0);
 }

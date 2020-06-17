@@ -3,8 +3,17 @@
 %}
 
 %option stack noyywrap
-
+%x SUBJECT PredicateAttrib OBJECT 
+%x 
 %%
-^a\n                { return CODE; }
-.|\n                { return ERROR; }
+
+<SUBJECT>URI
+
+<PREDICATE>rdf:type    { return PredicateAttrib;   }
+<PREDICATE>URI         { return PredicateRelation;   }
+
+<OBJECT>URI
+
+[ ]|\n                 { ; }
+
 %%
