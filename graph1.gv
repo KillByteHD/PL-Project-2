@@ -1,11 +1,21 @@
-digraph G {
-    main -> parse -> execute;
-    main -> init;
-    main -> cleanup;
-    execute -> make_string;
-    execute -> printf
-    init -> make_string;
-    main -> printf;
-    execute -> compare;
-    main -> kinda_gay;
+digraph G 
+{
+    node [shape=box,style=filled];
+
+    Andre [color=lightblue];
+    Maria [color=pink];
+    Antonieta [color=pink];
+    Antonio [color=lightblue];
+    Amelia [color=pink];
+    Joao [color=lightblue];
+    Papiro [color=lightblue];
+
+    Andre -> Antonio [label="temFilho"];
+    Maria -> Antonio [label="temFilho"];
+
+    Amelia -> Antonieta [label="temFilha"];
+    Joao -> Antonieta [label="temFilha"];
+
+    Antonieta -> Papiro [label="temFilho"];
+    Antonio -> Papiro [label="temFilho"];
 }
