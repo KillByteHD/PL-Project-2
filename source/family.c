@@ -1,5 +1,6 @@
 #include "family.h"
-
+#include <stdio.h>
+#include <string.h>
 
 
 static void __free_relation(void* ptr)
@@ -20,14 +21,14 @@ family_tree* init_family_tree(void)
 }
 
 
-void add_person(family_tree* fs, char* name)
+void add_person(family_tree* fs, const char* name)
 {
     person_data* person = malloc(sizeof(person_data)); 
     person->gender = NULL;
     person->relations = g_ptr_array_new();
     
     g_ptr_array_set_free_func(person->relations, __free_relation);
-    g_hash_table_insert(fs, name, person);
+    g_hash_table_insert(fs, strdup(name), person);
 }
 
 
@@ -58,10 +59,14 @@ void set_person_gender(family_tree* fs, const char* name, const uint8_t gender)
 }
 
 
-void add_person_relation(family_tree* fs, const char* name, relation* rel)
+void add_person_relation(family_tree* fs, const char* name, const char* relation_name, const char* target)
 {
     person_data* tmp = (person_data*) g_hash_table_lookup(fs, name);
-    g_ptr_array_add(tmp->relations, rel);
+
+    relation* new_relation = malloc(sizeof(relation));
+    new_relation->name = strdup(relation_name);
+    new_relation->target = strdup(target);
+    g_ptr_array_add(tmp->relations, new_relation);
 }
 
 
@@ -69,4 +74,40 @@ void free_family_tree(family_tree* fs)
 {
     g_hash_table_remove_all(fs);
     free(fs);
+}
+
+
+
+static void __relations_print_element(void* data, void* person_name)
+{
+    const relation* tmp = (relation*) data;
+    const char* name = (char*) person_name;
+
+    printf("    %s -> %s [label=\"%s\"];\n", name, tmp->target, tmp->name);
+}
+
+
+static void __family_print_entry(void* key, void* value, void* user_data)
+{
+    (void) user_data;
+    const char* name = (char*) key;
+    const person_data* tmp = (person_data*) value;
+    
+    if(tmp->gender != NULL)
+    {
+        static const char* GENDER_TO_STR[2] = { "pink", "lightblue" };
+        printf("    %s [color=%s];\n", name, GENDER_TO_STR[*(tmp->gender)]);
+    }
+
+    g_ptr_array_foreach(tmp->relations, __relations_print_element, (void*) name);
+}
+
+void print_dot_tree(family_tree* fs)
+{
+    puts("digraph Family\n{");
+    puts("    node [shape=box,style=filled];") ;
+
+    g_hash_table_foreach(fs, __family_print_entry, NULL);
+
+    printf("}");
 }

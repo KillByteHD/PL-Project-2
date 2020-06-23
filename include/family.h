@@ -27,20 +27,24 @@ typedef GHashTable family_tree; // Key: char* , Value: person_data*
 
 family_tree* init_family_tree(void);
 
-void add_person(family_tree* , char* name);
+void add_person(family_tree*, const char* name);
 
 
-person_data* get_person_data(family_tree* fs, const char* name);
+person_data* get_person_data(family_tree*, const char* name);
 
-uint8_t* get_person_gender(family_tree* fs, const char* name);
+uint8_t* get_person_gender(family_tree*, const char* name);
 
-GPtrArray* get_person_relations(family_tree* fs, const char* name);
+GPtrArray* get_person_relations(family_tree*, const char* name);
 
 
-void set_person_gender(family_tree* fs, const char* name, const uint8_t gender);
+void set_person_gender(family_tree*, const char* name, const uint8_t gender);
 
-void add_person_relation(family_tree* fs, const char* name, relation* rel);
+void add_person_relation(family_tree*, const char* name, const char* relation_name, const char* target);
 
 void free_family_tree(family_tree*);
+
+void print_dot_tree(family_tree*);
+
+void print_dot_tree(family_tree*);
 
 #endif // FAMILY_H
