@@ -32,6 +32,18 @@ void add_person(family_tree* fs, const char* name)
 }
 
 
+void add_person_with_gender(family_tree* fs, const char* name, const uint8_t gender)
+{
+    person_data* person = malloc(sizeof(person_data)); 
+    person->gender = malloc(sizeof(uint8_t));
+    *(person->gender) = gender;
+    person->relations = g_ptr_array_new();
+    
+    g_ptr_array_set_free_func(person->relations, __free_relation);
+    g_hash_table_insert(fs, strdup(name), person);
+}
+
+
 person_data* get_person_data(family_tree* fs, const char* name)
 {
     return (person_data*) g_hash_table_lookup(fs, name);

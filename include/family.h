@@ -29,6 +29,8 @@ family_tree* init_family_tree(void);
 
 void add_person(family_tree*, const char* name);
 
+void add_person_with_gender(family_tree*, const char* name, const uint8_t gender);
+
 
 person_data* get_person_data(family_tree*, const char* name);
 
