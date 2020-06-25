@@ -7,24 +7,31 @@
 %}
 
 
+#define NAMED_INDIVIDUAL 0x00
+#define PERSON 0x01
+
 %union{
     char* str;
+    uint8_t val;
 }
 
-%token Subject PredicateAttrib PredicateRelation Object
-%%
+:<relation>
 
+%token Subject PredicateInit PredicateGender PredicateRelation Object
+
+%%
 Line : Triplets '.'
 
-Triplets : Subject Predicate Object      { /* Codigo de adicionar esta informação ao hashmap */ }
+Triplets : Subject Predicate Object       { /* Codigo de adicionar esta informação ao hashmap */ }
          | Triplets ',' Object            { /* Codigo de adicionar esta informação ao hashmap */ }
          | Triplets ';' Predicate Object  { /* Codigo de adicionar esta informação ao hashmap */ }
          ;
 
-Predicate : PredicateAttrib
-          | PredicateRelation
-          ;
 
+Predicate : PredicateInit      {  }
+          | PredicateGender    {  }
+          | PredicateRelation  {  }
+          ;
 %%
 
 #include "lex.yy.c"

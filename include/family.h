@@ -47,6 +47,6 @@ void free_family_tree(family_tree*);
 
 void print_dot_tree(family_tree*);
 
-void print_dot_tree(family_tree*);
+//void print_dot_tree(family_tree*);
 
 #endif // FAMILY_H
