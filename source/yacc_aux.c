@@ -1,9 +1,52 @@
 #include "yacc_aux.h"
 
+#include "family.h"
 
-/* typedef void (*)(const char*, const char*) PredicateHandler;
 
-void handle_predicate_action(const char* subject, const uint8_t predicate_type, const char* object)
+typedef void (*PredicateHandler)(family_tree* , const char*, const char*, const char*);
+
+
+void handle_init(family_tree* fam, const char* subj, const char* __unnamed__ , const char* obj)
 {
-    static const void (PREDICATE*)(const char*, const char*) 
-} */
+    (void) __unnamed__;
+    add_person(fam, obj);
+}
+
+void handle_gender(family_tree* fam, const char* subj, const char* __unnamed__ , const char* obj)
+{
+    (void) __unnamed__;
+    if(strcmp(obj,":Male") == 0)
+    {
+        set_person_gender(fam, subj, MALE);
+    }
+    else if(strcmp(obj,":Female") == 0)
+    {
+        set_person_gender(fam, subj, FEMALE);
+    }
+    else
+    {
+        /* Gender error handling */
+    }
+}
+
+void handle_relation(family_tree* fam, const char* subj, const char* rel_name , const char* obj)
+{
+    add_person_relation(fam, subj, rel_name, obj);
+}
+
+
+void handle_predicate_action(family_tree* fam, const char* subject, const pred_type predicate_type, const char* object)
+{
+    static const PredicateHandler handlers = {
+        handle_init, handle_gender, handle_relation 
+    };
+
+    if(predicate_type.pred_type > MAX_PRED_IDX)
+    {
+        /* Invalid predicate type handling */
+    }
+    else
+    {
+        __handlers[predicate_type.pred_type](fam, subject, predicate_type.string, object);
+    }
+}
