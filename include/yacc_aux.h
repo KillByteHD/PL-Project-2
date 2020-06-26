@@ -16,6 +16,15 @@ typedef struct kek{
     char* string;
 } pred_type;
 
+typedef struct __triplet_aux
+{
+    char* subject,
+    pred_type predicate;
+    char* object;
+} triplet_aux;
+
 void handle_predicate_action(family_tree* fam, const char* subject, const pred_type predicate_type, const char* object);
+
+triplet_aux triplet_ctor(const char* subject, const pred_type predicate_type, const char* object);
 
 #endif // YACC_AUX_H

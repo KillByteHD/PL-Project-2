@@ -5,13 +5,7 @@
 #include "family.h"
 #include "yacc_aux.h"
 
-typedef struct __triplet_aux
-{
-    char* subject,
-    pred_type pred;
-    char* object;
 
-} triplet_aux;
 
 
 family_tree* fam = NULL;
@@ -35,9 +29,9 @@ family_tree* fam = NULL;
 %%
 Line : Triplets '.'
 
-Triplets : SUBJECT Predicate OBJECT       { handle_predicate_action(fam, $1, $2, $3); /* $$ = $2; */ }
-         | Triplets ',' OBJECT            { /* $$ = $1; */ }
-         | Triplets ';' Predicate OBJECT  { /* $$ = $3; */ }
+Triplets : SUBJECT Predicate OBJECT       { $$ = triplet_ctor($1, $2, $3);                   handle_predicate_action(fam, $$.subject, $$.predicate, $$.object); }
+         | Triplets ',' OBJECT            { $$ = triplet_ctor($1.subject, $1.predicate, $3); handle_predicate_action(fam, $$.subject, $$.predicate, $$.object); }
+         | Triplets ';' Predicate OBJECT  { $$ = triplet_ctor($1.subject, $3, $4);           handle_predicate_action(fam, $$.subject, $$.predicate, $$.object); }
          ;
 
 
