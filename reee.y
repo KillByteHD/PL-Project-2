@@ -2,14 +2,16 @@
 #include <stdio.h>
 #include <strings.h>
 #include <stdlib.h>
-#include "family.h"
 #include "yacc_aux.h"
 
-
+int yylex(void);
+int yyerror(const char *s);
 
 
 family_tree* fam = NULL;
+
 %}
+
 
 %union{
     char* str_val;
@@ -29,9 +31,9 @@ family_tree* fam = NULL;
 %%
 Line : Triplets '.'
 
-Triplets : SUBJECT Predicate OBJECT       { $$ = triplet_ctor($1, $2, $3);                   handle_predicate_action(fam, $$.subject, $$.predicate, $$.object); }
-         | Triplets ',' OBJECT            { $$ = triplet_ctor($1.subject, $1.predicate, $3); handle_predicate_action(fam, $$.subject, $$.predicate, $$.object); }
-         | Triplets ';' Predicate OBJECT  { $$ = triplet_ctor($1.subject, $3, $4);           handle_predicate_action(fam, $$.subject, $$.predicate, $$.object); }
+Triplets : SUBJECT Predicate OBJECT       { $$ = triplet_ctor( $1 , $2 , $3 );                   handle_predicate_action(fam, $$.subject, $$.predicate, $$.object); }
+         | Triplets ',' OBJECT            { $$ = triplet_ctor( $1.subject , $1.predicate , $3); handle_predicate_action(fam, $$.subject, $$.predicate, $$.object); }
+         | Triplets ';' Predicate OBJECT  { $$ = triplet_ctor( $1.subject , $3, $4);           handle_predicate_action(fam, $$.subject, $$.predicate, $$.object); }
          ;
 
 
@@ -43,9 +45,9 @@ Predicate : PREDICATE_INIT      { $$ = (pred_type) { .pred_type = PRED_INIT_IDX 
 
 %%
 
-#include "lex.yy.c"
+//#include "lex.yy.c"
 
-int yyerror(char *s)
+int yyerror(const char *s)
 {
     fprintf(stderr, "ERROR: %s \n", s);
     return 1;

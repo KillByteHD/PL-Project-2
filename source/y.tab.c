@@ -72,15 +72,16 @@
 #include <stdio.h>
 #include <strings.h>
 #include <stdlib.h>
-#include "family.h"
 #include "yacc_aux.h"
 
-
+int yylex(void);
+int yyerror(const char *s);
 
 
 family_tree* fam = NULL;
 
-#line 84 "y.tab.c"
+
+#line 85 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -146,14 +147,14 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 14 "reee.y"
+#line 16 "reee.y"
 
     char* str_val;
     uint8_t u8_val;
     pred_type pred_val;
     triplet_aux triplet_val;
 
-#line 157 "y.tab.c"
+#line 158 "y.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -553,7 +554,7 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINEYYN -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    30,    30,    32,    33,    34,    38,    39,    40
+       0,    32,    32,    34,    35,    36,    40,    41,    42
 };
 #endif
 
@@ -1143,43 +1144,43 @@ yyreduce:
   switch (yyn)
     {
   case 3:
-#line 32 "reee.y"
-                                          { (yyval.triplet_val) = triplet_ctor((yyvsp[-2].str_val), (yyvsp[-1].pred_val), (yyvsp[0].str_val));                   handle_predicate_action(fam, (yyval.triplet_val).subject, (yyval.triplet_val).predicate, (yyval.triplet_val).object); }
-#line 1149 "y.tab.c"
+#line 34 "reee.y"
+                                          { (yyval.triplet_val) = triplet_ctor( (yyvsp[-2].str_val) , (yyvsp[-1].pred_val) , (yyvsp[0].str_val) );                   handle_predicate_action(fam, (yyval.triplet_val).subject, (yyval.triplet_val).predicate, (yyval.triplet_val).object); }
+#line 1150 "y.tab.c"
     break;
 
   case 4:
-#line 33 "reee.y"
-                                          { (yyval.triplet_val) = triplet_ctor((yyvsp[-2].triplet_val).subject, (yyvsp[-2].triplet_val).predicate, (yyvsp[0].str_val)); handle_predicate_action(fam, (yyval.triplet_val).subject, (yyval.triplet_val).predicate, (yyval.triplet_val).object); }
-#line 1155 "y.tab.c"
+#line 35 "reee.y"
+                                          { (yyval.triplet_val) = triplet_ctor( (yyvsp[-2].triplet_val).subject , (yyvsp[-2].triplet_val).predicate , (yyvsp[0].str_val)); handle_predicate_action(fam, (yyval.triplet_val).subject, (yyval.triplet_val).predicate, (yyval.triplet_val).object); }
+#line 1156 "y.tab.c"
     break;
 
   case 5:
-#line 34 "reee.y"
-                                          { (yyval.triplet_val) = triplet_ctor((yyvsp[-3].triplet_val).subject, (yyvsp[-1].pred_val), (yyvsp[0].str_val));           handle_predicate_action(fam, (yyval.triplet_val).subject, (yyval.triplet_val).predicate, (yyval.triplet_val).object); }
-#line 1161 "y.tab.c"
+#line 36 "reee.y"
+                                          { (yyval.triplet_val) = triplet_ctor( (yyvsp[-3].triplet_val).subject , (yyvsp[-1].pred_val), (yyvsp[0].str_val));           handle_predicate_action(fam, (yyval.triplet_val).subject, (yyval.triplet_val).predicate, (yyval.triplet_val).object); }
+#line 1162 "y.tab.c"
     break;
 
   case 6:
-#line 38 "reee.y"
+#line 40 "reee.y"
                                 { (yyval.pred_val) = (pred_type) { .pred_type = PRED_INIT_IDX   , .string = NULL       }; }
-#line 1167 "y.tab.c"
+#line 1168 "y.tab.c"
     break;
 
   case 7:
-#line 39 "reee.y"
+#line 41 "reee.y"
                                 { (yyval.pred_val) = (pred_type) { .pred_type = PRED_GENDER_IDX , .string = NULL       }; }
-#line 1173 "y.tab.c"
+#line 1174 "y.tab.c"
     break;
 
   case 8:
-#line 40 "reee.y"
+#line 42 "reee.y"
                                 { (yyval.pred_val) = (pred_type) { .pred_type = PRED_INIT_IDX   , .string = strdup((yyvsp[0].str_val)) }; }
-#line 1179 "y.tab.c"
+#line 1180 "y.tab.c"
     break;
 
 
-#line 1183 "y.tab.c"
+#line 1184 "y.tab.c"
 
       default: break;
     }
@@ -1373,12 +1374,12 @@ yyreturn:
   return yyresult;
 }
 
-#line 44 "reee.y"
+#line 46 "reee.y"
 
 
-#include "lex.yy.c"
+//#include "lex.yy.c"
 
-int yyerror(char *s)
+int yyerror(const char *s)
 {
     fprintf(stderr, "ERROR: %s \n", s);
     return 1;

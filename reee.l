@@ -1,10 +1,10 @@
 %{
 /* Declaracoes C diversas */
 
+#include "yacc_aux.h"
 #include "y.tab.h"
 #include <ctype.h> 
 #include <string.h>
-
 
 %}
 
@@ -31,9 +31,3 @@
 <END>";"                                  { BEGIN NEXT_PREDICATE; return yytext[0]; }
 
 %%
-
-
-int yywrap()
-{ 
-    return 1;
-}

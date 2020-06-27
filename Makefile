@@ -26,7 +26,7 @@ OBJECTS = $(patsubst $(SOURCE_DIR)/%,$(BUILD_DIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 
 
 
-all: dirs flex_n_yacc $(OBJECTS)
+all: dirs flex_n_yacc $(OBJECTS) $(OUT)
 
 flex_n_yacc:
 	$(FLEXC) $(SRC_FLEX)

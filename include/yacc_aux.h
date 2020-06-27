@@ -1,7 +1,7 @@
 #ifndef YACC_AUX_H
 #define YACC_AUX_H
 
-#include <stdint.h>
+#include <stdint.h> // Not necessary
 
 #include "family.h"
 
@@ -13,17 +13,19 @@
 #define PRED_RELATION_IDX 2U
 #define MAX_PRED_IDX 3U
 
+
 typedef struct __pred_type
 {
     uint8_t pred_type;
     char* string;
 } pred_type;
 
+
 typedef struct __triplet_aux
 {
-    const char* subject;
-    const pred_type predicate;
-    const char* object;
+    char* subject;
+    pred_type predicate;
+    char* object;
 } triplet_aux;
 
 

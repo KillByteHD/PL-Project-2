@@ -481,10 +481,10 @@ char *yytext;
 #line 2 "reee.l"
 /* Declaracoes C diversas */
 
+#include "yacc_aux.h"
 #include "y.tab.h"
 #include <ctype.h> 
 #include <string.h>
-
 
 #line 489 "lex.yy.c"
 
@@ -1904,8 +1904,3 @@ void yyfree (void * ptr )
 #line 33 "reee.l"
 
 
-
-int yywrap()
-{ 
-    return 1;
-}
