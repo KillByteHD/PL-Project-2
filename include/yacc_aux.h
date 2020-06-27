@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#include "family.h"
+
 #define NAMED_INDIVIDUAL 0x00
 #define PERSON 0x01
 
@@ -11,17 +13,19 @@
 #define PRED_RELATION_IDX 2U
 #define MAX_PRED_IDX 3U
 
-typedef struct kek{
+typedef struct __pred_type
+{
     uint8_t pred_type;
     char* string;
 } pred_type;
 
 typedef struct __triplet_aux
 {
-    char* subject,
-    pred_type predicate;
-    char* object;
+    const char* subject;
+    const pred_type predicate;
+    const char* object;
 } triplet_aux;
+
 
 void handle_predicate_action(family_tree* fam, const char* subject, const pred_type predicate_type, const char* object);
 

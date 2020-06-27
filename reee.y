@@ -19,8 +19,8 @@ family_tree* fam = NULL;
 }
 
 
-%token SUBJECT PREDICATE_INIT PREDICATE_GENDER PREDICATE_RELATION OBJECT
-%type <str_val> PredicateRelation
+%token PREDICATE_INIT PREDICATE_GENDER
+%token <str_val> PREDICATE_RELATION SUBJECT OBJECT
 %type <triplet_val> Triplets
 %type <pred_val> Predicate
 

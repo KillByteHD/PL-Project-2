@@ -1,7 +1,5 @@
 #include "yacc_aux.h"
 
-#include "family.h"
-
 
 typedef void (*PredicateHandler)(family_tree* , const char*, const char*, const char*);
 
@@ -37,7 +35,7 @@ void handle_relation(family_tree* fam, const char* subj, const char* rel_name , 
 
 void handle_predicate_action(family_tree* fam, const char* subject, const pred_type predicate_type, const char* object)
 {
-    static const PredicateHandler handlers = {
+    static const PredicateHandler handlers[3] = {
         handle_init, handle_gender, handle_relation 
     };
 
@@ -47,7 +45,7 @@ void handle_predicate_action(family_tree* fam, const char* subject, const pred_t
     }
     else
     {
-        __handlers[predicate_type.pred_type](fam, subject, predicate_type.string, object);
+        handlers[predicate_type.pred_type](fam, subject, predicate_type.string, object);
     }
 }
 
@@ -56,7 +54,7 @@ triplet_aux triplet_ctor(const char* a_subject, const pred_type a_predicate_type
 {
     return (triplet_aux) {
         .subject = a_subject,
-        .predicate_type = a_predicate_type,
+        .predicate = a_predicate_type,
         .object = a_object
     };
 }

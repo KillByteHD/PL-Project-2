@@ -9,32 +9,31 @@
 %}
 
 %option stack noyywrap
-%x SUBJECT COMMENT COMMA SEMICOLON
+
+%x NEXT_PREDICATE NEXT_OBJECT END
 
 %%
 
-^#               {BEGIN COMMENT;}
+[ ]+|\n                                   { ; }
+:[A-Za-z0-9_]+                            { yylval.str_val = strdup(yytext); BEGIN NEXT_PREDICATE; return SUBJECT; }
 
-<COMMENT>(\n|\r) {BEGIN INITIAL;}
+<NEXT_PREDICATE>[ ]+|\n                   { ; }
+<NEXT_PREDICATE>"rdf:type"                { BEGIN NEXT_OBJECT; return PREDICATE_INIT; }
+<NEXT_PREDICATE>":gender"                 { BEGIN NEXT_OBJECT; return PREDICATE_GENDER; }
+<NEXT_PREDICATE>[A-Za-z0-9]*:[A-Za-z0-9]+ { yylval.str_val = strdup(yytext); BEGIN NEXT_OBJECT; return PREDICATE_RELATION; }
 
-^:[A-Za-z0-9_]+/[ ]+                {yylval.str = strdup(yytext);return SUBJECT;}
-[ ][A-Za-z0-9:]+/[ ]*[.]            {yylval.u8val = 0; return OBJECT}
-[ ][A-Za-z0-9:]+/[ ]*[,]            {yylval.u8val = 0; return OBJECT; BEGIN COMMA;}
-[ ][A-Za-z0-9:]+/[ ]*[;]            {yylval.u8val = 0; return OBJECT; BEGIN SEMICOLON;}
-[ ][A-Za-z0-9:]+/[ ]+               {return PREDICATE_INIT;}
+<NEXT_OBJECT>[ ]+|\n                      { ; }
+<NEXT_OBJECT>[A-Za-z0-9]*:[A-Za-z0-9]+    { yylval.str_val = strdup(yytext); BEGIN END; return OBJECT; }
 
-<COMMA>[A-Za-z0-9:]+/[ ]*[.]        {yylval.u8val = 1; yyval.str = strdup(yytext); return OBJECT; BEGIN INITIAL;}
-<COMMA>[A-Za-z0-9:]+/[ ]*[,]        {yylval.u8val = 1; yyval.str = strdup(yytext); return OBJECT;}
-<COMMA>[A-Za-z0-9:]+/[ ]*[;]        {yylval.u8val = 1; yval.str = strdup(yytext); return OBJECT; BEGIN SEMICOLON;}
+<END>[ ]+|\n                              { ; }
+<END>"."                                  { BEGIN INITIAL;        return yytext[0]; }
+<END>","                                  { BEGIN NEXT_OBJECT;    return yytext[0]; }
+<END>";"                                  { BEGIN NEXT_PREDICATE; return yytext[0]; }
 
-<SEMICOLON>:"temSexo"/[ ]+[^.,;]    {return PREDICATE_GENDER;}
-<SEMICOLON>[A-Za-z0-9:]+/[ ]+[^.,;] {yylval.str = strdup(yytext) ;return PREDICATE_RELATION;}
-<SEMICOLON>[A-Za-z0-9:]+/[ ]*[.]    {yyval.str = strdup(yytext); return OBJECT; BEGIN INITIAL;}
-<SEMICOLON>[A-Za-z0-9:]+/[ ]*[,]    {yyval.str = strdup(yytext); return OBJECT; BEGIN COMMA;}
-<SEMICOLON>[A-Za-z0-9:]+/[ ]*[;]    {yyval.str = strdup(yytext); return OBJECT;}
- 
 %%
 
-int yywrap(){ 
-    return(1); 
+
+int yywrap()
+{ 
+    return 1;
 }
