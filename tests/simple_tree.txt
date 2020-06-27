@@ -1,4 +1,7 @@
+
+
 :Antonio rdf:type owl:NamedIndividual ,
                                :Pessoa ;
+                      :gender :Female;
                       :temMae :Custodia ;
-                      :temPai :Manuel .
+                      :temTio :Manuel .

@@ -1,0 +1,7 @@
+digraph Family
+{
+    node [shape=box,style=filled];
+    Antonio [color=pink];
+    Antonio -> Custodia [label="temMae"];
+    Antonio -> Manuel [label="temTio"];
+}

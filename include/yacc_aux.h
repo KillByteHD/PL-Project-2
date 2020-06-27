@@ -8,10 +8,10 @@
 #define NAMED_INDIVIDUAL 0x00
 #define PERSON 0x01
 
-#define PRED_INIT_IDX 0U
-#define PRED_GENDER_IDX 1U
-#define PRED_RELATION_IDX 2U
-#define MAX_PRED_IDX 3U
+#define PRED_INIT_IDX 0x00
+#define PRED_GENDER_IDX 0x01
+#define PRED_RELATION_IDX 0x02
+#define MAX_PRED_IDX 0x03
 
 
 typedef struct __pred_type

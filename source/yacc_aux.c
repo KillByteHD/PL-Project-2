@@ -1,5 +1,6 @@
 #include "yacc_aux.h"
 
+#include <stdio.h>
 
 typedef void (*PredicateHandler)(family_tree* , const char*, const char*, const char*);
 
@@ -7,7 +8,12 @@ typedef void (*PredicateHandler)(family_tree* , const char*, const char*, const 
 void handle_init(family_tree* fam, const char* subj, const char* __unnamed__ , const char* obj)
 {
     (void) __unnamed__;
-    add_person(fam, obj);
+    (void) obj;
+    if (get_person_data(fam, subj) == NULL)
+    {
+        add_person(fam, subj);
+    }
+
 }
 
 void handle_gender(family_tree* fam, const char* subj, const char* __unnamed__ , const char* obj)
@@ -29,7 +35,21 @@ void handle_gender(family_tree* fam, const char* subj, const char* __unnamed__ ,
 
 void handle_relation(family_tree* fam, const char* subj, const char* rel_name , const char* obj)
 {
+    //puts("in add relation");
     add_person_relation(fam, subj, rel_name, obj);
+
+    
+    
+    /* if(g_ptr_array_index(get_person_relations(fam,subj),0) == NULL)
+    {
+        puts("Relations are empty");
+    }
+    else
+    {
+        //puts("Not empty");
+    } */
+    
+    
 }
 
 
@@ -45,6 +65,7 @@ void handle_predicate_action(family_tree* fam, const char* subject, const pred_t
     }
     else
     {
+        //printf("%d\n", predicate_type.pred_type);
         handlers[predicate_type.pred_type](fam, subject, predicate_type.string, object);
     }
 }

@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "yacc_aux.h"
 
+
 int yylex(void);
 int yyerror(const char *s);
 
@@ -31,15 +32,15 @@ family_tree* fam = NULL;
 %%
 Line : Triplets '.'
 
-Triplets : SUBJECT Predicate OBJECT       { $$ = triplet_ctor( $1 , $2 , $3 );                   handle_predicate_action(fam, $$.subject, $$.predicate, $$.object); }
+Triplets : SUBJECT Predicate OBJECT       { $$ = triplet_ctor( $1 , $2 , $3 );                  handle_predicate_action(fam, $$.subject, $$.predicate, $$.object); }
          | Triplets ',' OBJECT            { $$ = triplet_ctor( $1.subject , $1.predicate , $3); handle_predicate_action(fam, $$.subject, $$.predicate, $$.object); }
-         | Triplets ';' Predicate OBJECT  { $$ = triplet_ctor( $1.subject , $3, $4);           handle_predicate_action(fam, $$.subject, $$.predicate, $$.object); }
+         | Triplets ';' Predicate OBJECT  { $$ = triplet_ctor( $1.subject , $3, $4);            handle_predicate_action(fam, $$.subject, $$.predicate, $$.object); }
          ;
 
 
-Predicate : PREDICATE_INIT      { $$ = (pred_type) { .pred_type = PRED_INIT_IDX   , .string = NULL       }; }
-          | PREDICATE_GENDER    { $$ = (pred_type) { .pred_type = PRED_GENDER_IDX , .string = NULL       }; }
-          | PREDICATE_RELATION  { $$ = (pred_type) { .pred_type = PRED_INIT_IDX   , .string = strdup($1) }; }
+Predicate : PREDICATE_INIT      { $$ = (pred_type) { .pred_type = PRED_INIT_IDX       , .string = NULL       }; }
+          | PREDICATE_GENDER    { $$ = (pred_type) { .pred_type = PRED_GENDER_IDX     , .string = NULL       }; }
+          | PREDICATE_RELATION  { $$ = (pred_type) { .pred_type = PRED_RELATION_IDX   , .string = strdup($1) }; }
           ;
 
 
@@ -57,11 +58,11 @@ int main()
 {
     fam = init_family_tree();
 
-    printf("Begin!\n");
+    //printf("Begin!\n");
     yyparse();
-    printf("End!\n");
+    //printf("End!\n");
 
     print_dot_tree(fam);
-    free_family_tree(fam);
+    //free_family_tree(fam);
     return 0;
 }

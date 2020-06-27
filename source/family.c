@@ -92,6 +92,7 @@ void free_family_tree(family_tree* fs)
 
 static void __relations_print_element(void* data, void* person_name)
 {
+    //puts("relations print");
     const relation* tmp = (relation*) data;
     const char* name = (char*) person_name;
 
@@ -104,7 +105,7 @@ static void __family_print_entry(void* key, void* value, void* user_data)
     (void) user_data;
     const char* name = (char*) key;
     const person_data* tmp = (person_data*) value;
-    
+
     if(tmp->gender != NULL)
     {
         static const char* GENDER_TO_STR[2] = { "pink", "lightblue" };
@@ -112,7 +113,10 @@ static void __family_print_entry(void* key, void* value, void* user_data)
     }
 
     g_ptr_array_foreach(tmp->relations, __relations_print_element, (void*) name);
+
 }
+
+#include <unistd.h>
 
 void print_dot_tree(family_tree* fs)
 {
@@ -120,6 +124,5 @@ void print_dot_tree(family_tree* fs)
     puts("    node [shape=box,style=filled];") ;
 
     g_hash_table_foreach(fs, __family_print_entry, NULL);
-
-    printf("}");
+    puts("}");
 }
