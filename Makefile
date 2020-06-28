@@ -67,7 +67,7 @@ graph:
 # Rule to instantly test a family tree example from the 'tests/' folder ended in the extension '.txt'
 # Builds the '.gv' in the graphs folder and makes the '.pdf' file with the graph in the same folder
 # USAGE: make graph GRAPH=family
-instant_run: all
+inst: all
 	./$(OUT) < tests/$(TEST).txt > graphs/$(TEST).gv && make graph GRAPH=graphs/$(TEST) && code graphs/$(TEST).pdf
 
 

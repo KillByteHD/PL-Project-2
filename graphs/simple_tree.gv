@@ -1,0 +1,12 @@
+digraph Family
+{
+    node [shape=box,style=filled];
+    Maria_Almeida [color=pink];
+    Jose_Faria [color=lightblue];
+    Antonio_Almeida [color=lightblue];
+    Antonio_Almeida -> Jose_Faria [label="temPai"];
+    Antonio_Almeida -> Maria_Almeida [label="temMae"];
+    Antonio_Almeida -> Rodrigo_Almeida [label="temTio"];
+    Joaquina_Albino [color=pink];
+    Joaquina_Albino -> Andre_Albino [label="temFilho"];
+}

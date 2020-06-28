@@ -35,21 +35,14 @@ void handle_gender(family_tree* fam, const char* subj, const char* __unnamed__ ,
 
 void handle_relation(family_tree* fam, const char* subj, const char* rel_name , const char* obj)
 {
-    //puts("in add relation");
-    add_person_relation(fam, subj, rel_name, obj);
-
-    
-    
-    /* if(g_ptr_array_index(get_person_relations(fam,subj),0) == NULL)
+    if (get_person_data(fam, subj) != NULL)
     {
-        puts("Relations are empty");
+        add_person_relation(fam, subj, rel_name, obj);
     }
     else
     {
-        //puts("Not empty");
-    } */
-    
-    
+        /* Unmatched name error handling */
+    }
 }
 
 

@@ -1,7 +1,22 @@
+:Maria_Almeida rdf:type owl:NamedIndividual , 
+                            :Pessoa .
+:Maria_Almeida :gender :Female .
 
 
-:Antonio rdf:type owl:NamedIndividual ,
+:Jose_Faria rdf:type owl:NamedIndividual . 
+:Jose_Faria rdf:type :Pessoa .
+:Jose_Faria :gender :Male .
+
+
+:Antonio_Almeida rdf:type owl:NamedIndividual ,
                                :Pessoa ;
-                      :gender :Female;
-                      :temMae :Custodia ;
-                      :temTio :Manuel .
+                      :gender :Male;
+                      :temPai :Jose_Faria ;
+                      :temMae :Maria_Almeida;
+                      :temTio :Rodrigo_Almeida .
+
+:Joaquina_Albino rdf:type owl:NamedIndividual ,
+                               :Pessoa ;
+                     :gender :Female .
+
+:Joaquina_Albino :temFilho :Andre_Albino .
