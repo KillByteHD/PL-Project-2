@@ -1,11 +1,11 @@
 digraph Family
 {
     node [shape=box,style=filled];
-    GayDudesDaughter [color=pink];
-    GayDudesDaughter -> GayDude1 [label="temPai"];
-    GayDudesDaughter -> GayDude2 [label="temPai"];
-    GayDude2 [color=lightblue];
-    GayDude1 [color=lightblue];
-    GayDude1 -> Antonieta [label="temMae"];
-    GayDude1 -> Antonio [label="temPai"];
+    Daughter [color=pink];
+    Daughter -> Man1 [label="temPai"];
+    Daughter -> Man2 [label="temPai"];
+    Man2 [color=lightblue];
+    Man1 [color=lightblue];
+    Man1 -> Antonieta [label="temMae"];
+    Man1 -> Antonio [label="temPai"];
 }

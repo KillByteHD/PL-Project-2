@@ -30,7 +30,11 @@ family_tree* fam = NULL;
 
 
 %%
-Line : Triplets '.'
+Lines : Lines Line
+      | 
+      ;
+
+Line : Triplets '.' { ; }
 
 Triplets : SUBJECT Predicate OBJECT       { $$ = triplet_ctor( $1 , $2 , $3 );                  handle_predicate_action(fam, $$.subject, $$.predicate, $$.object); }
          | Triplets ',' OBJECT            { $$ = triplet_ctor( $1.subject , $1.predicate , $3); handle_predicate_action(fam, $$.subject, $$.predicate, $$.object); }

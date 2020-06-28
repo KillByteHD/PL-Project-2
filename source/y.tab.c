@@ -185,9 +185,10 @@ enum yysymbol_kind_t
   YYSYMBOL_9_ = 9,                         /* ','  */
   YYSYMBOL_10_ = 10,                       /* ';'  */
   YYSYMBOL_YYACCEPT = 11,                  /* $accept  */
-  YYSYMBOL_Line = 12,                      /* Line  */
-  YYSYMBOL_Triplets = 13,                  /* Triplets  */
-  YYSYMBOL_Predicate = 14                  /* Predicate  */
+  YYSYMBOL_Lines = 12,                     /* Lines  */
+  YYSYMBOL_Line = 13,                      /* Line  */
+  YYSYMBOL_Triplets = 14,                  /* Triplets  */
+  YYSYMBOL_Predicate = 15                  /* Predicate  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -495,18 +496,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  8
+#define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   15
+#define YYLAST   11
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  11
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  4
+#define YYNNTS  5
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  8
+#define YYNRULES  10
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  16
+#define YYNSTATES  17
 
 #define YYMAXUTOK   262
 
@@ -555,7 +556,8 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINEYYN -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    33,    33,    35,    36,    37,    41,    42,    43
+       0,    33,    33,    34,    37,    39,    40,    41,    45,    46,
+      47
 };
 #endif
 
@@ -573,7 +575,7 @@ static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "PREDICATE_INIT",
   "PREDICATE_GENDER", "PREDICATE_RELATION", "SUBJECT", "OBJECT", "'.'",
-  "','", "';'", "$accept", "Line", "Triplets", "Predicate", YY_NULLPTR
+  "','", "';'", "$accept", "Lines", "Line", "Triplets", "Predicate", YY_NULLPTR
 };
 
 static const char *
@@ -593,7 +595,7 @@ static const yytype_int16 yytoknum[] =
 };
 #endif
 
-#define YYPACT_NINF (-6)
+#define YYPACT_NINF (-8)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -607,8 +609,8 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-       0,    -3,     7,    -5,    -6,    -6,    -6,     1,    -6,    -6,
-       2,    -3,    -6,    -6,     3,    -6
+      -8,     0,    -8,    -2,    -8,    -1,    -8,    -8,    -8,    -3,
+      -8,     3,    -2,    -8,    -8,     4,    -8
 };
 
   /* YYDEFACTSTATE-NUM -- Default reduction number in state STATE-NUM.
@@ -616,20 +618,20 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     0,     0,     0,     6,     7,     8,     0,     1,     2,
-       0,     0,     3,     4,     0,     5
+       3,     0,     1,     0,     2,     0,     8,     9,    10,     0,
+       4,     0,     0,     5,     6,     0,     7
 };
 
   /* YYPGOTONTERM-NUM.  */
 static const yytype_int8 yypgoto[] =
 {
-      -6,    -6,    -6,     4
+      -8,    -8,    -8,    -8,    -7
 };
 
   /* YYDEFGOTONTERM-NUM.  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     2,     3,     7
+      -1,     1,     4,     5,     9
 };
 
   /* YYTABLEYYPACT[STATE-NUM] -- What to do in state STATE-NUM.  If
@@ -637,34 +639,36 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       4,     5,     6,     9,    10,    11,     1,     8,    12,    13,
-      15,     0,     0,     0,     0,    14
+       2,     6,     7,     8,    13,    15,     3,    10,    11,    12,
+      14,    16
 };
 
 static const yytype_int8 yycheck[] =
 {
-       3,     4,     5,     8,     9,    10,     6,     0,     7,     7,
-       7,    -1,    -1,    -1,    -1,    11
+       0,     3,     4,     5,     7,    12,     6,     8,     9,    10,
+       7,     7
 };
 
   /* YYSTOSSTATE-NUM -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     6,    12,    13,     3,     4,     5,    14,     0,     8,
-       9,    10,     7,     7,    14,     7
+       0,    12,     0,     6,    13,    14,     3,     4,     5,    15,
+       8,     9,    10,     7,     7,    15,     7
 };
 
   /* YYR1YYN -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    11,    12,    13,    13,    13,    14,    14,    14
+       0,    11,    12,    12,    13,    14,    14,    14,    15,    15,
+      15
 };
 
   /* YYR2YYN -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     2,     3,     3,     4,     1,     1,     1
+       0,     2,     2,     0,     2,     3,     3,     4,     1,     1,
+       1
 };
 
 
@@ -1144,44 +1148,50 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 3:
-#line 35 "reee.y"
-                                          { (yyval.triplet_val) = triplet_ctor( (yyvsp[-2].str_val) , (yyvsp[-1].pred_val) , (yyvsp[0].str_val) );                  handle_predicate_action(fam, (yyval.triplet_val).subject, (yyval.triplet_val).predicate, (yyval.triplet_val).object); }
-#line 1151 "y.tab.c"
-    break;
-
   case 4:
-#line 36 "reee.y"
-                                          { (yyval.triplet_val) = triplet_ctor( (yyvsp[-2].triplet_val).subject , (yyvsp[-2].triplet_val).predicate , (yyvsp[0].str_val)); handle_predicate_action(fam, (yyval.triplet_val).subject, (yyval.triplet_val).predicate, (yyval.triplet_val).object); }
-#line 1157 "y.tab.c"
+#line 37 "reee.y"
+                    { ; }
+#line 1155 "y.tab.c"
     break;
 
   case 5:
-#line 37 "reee.y"
-                                          { (yyval.triplet_val) = triplet_ctor( (yyvsp[-3].triplet_val).subject , (yyvsp[-1].pred_val), (yyvsp[0].str_val));            handle_predicate_action(fam, (yyval.triplet_val).subject, (yyval.triplet_val).predicate, (yyval.triplet_val).object); }
-#line 1163 "y.tab.c"
+#line 39 "reee.y"
+                                          { (yyval.triplet_val) = triplet_ctor( (yyvsp[-2].str_val) , (yyvsp[-1].pred_val) , (yyvsp[0].str_val) );                  handle_predicate_action(fam, (yyval.triplet_val).subject, (yyval.triplet_val).predicate, (yyval.triplet_val).object); }
+#line 1161 "y.tab.c"
     break;
 
   case 6:
-#line 41 "reee.y"
-                                { (yyval.pred_val) = (pred_type) { .pred_type = PRED_INIT_IDX       , .string = NULL       }; }
-#line 1169 "y.tab.c"
+#line 40 "reee.y"
+                                          { (yyval.triplet_val) = triplet_ctor( (yyvsp[-2].triplet_val).subject , (yyvsp[-2].triplet_val).predicate , (yyvsp[0].str_val)); handle_predicate_action(fam, (yyval.triplet_val).subject, (yyval.triplet_val).predicate, (yyval.triplet_val).object); }
+#line 1167 "y.tab.c"
     break;
 
   case 7:
-#line 42 "reee.y"
-                                { (yyval.pred_val) = (pred_type) { .pred_type = PRED_GENDER_IDX     , .string = NULL       }; }
-#line 1175 "y.tab.c"
+#line 41 "reee.y"
+                                          { (yyval.triplet_val) = triplet_ctor( (yyvsp[-3].triplet_val).subject , (yyvsp[-1].pred_val), (yyvsp[0].str_val));            handle_predicate_action(fam, (yyval.triplet_val).subject, (yyval.triplet_val).predicate, (yyval.triplet_val).object); }
+#line 1173 "y.tab.c"
     break;
 
   case 8:
-#line 43 "reee.y"
+#line 45 "reee.y"
+                                { (yyval.pred_val) = (pred_type) { .pred_type = PRED_INIT_IDX       , .string = NULL       }; }
+#line 1179 "y.tab.c"
+    break;
+
+  case 9:
+#line 46 "reee.y"
+                                { (yyval.pred_val) = (pred_type) { .pred_type = PRED_GENDER_IDX     , .string = NULL       }; }
+#line 1185 "y.tab.c"
+    break;
+
+  case 10:
+#line 47 "reee.y"
                                 { (yyval.pred_val) = (pred_type) { .pred_type = PRED_RELATION_IDX   , .string = strdup((yyvsp[0].str_val)) }; }
-#line 1181 "y.tab.c"
+#line 1191 "y.tab.c"
     break;
 
 
-#line 1185 "y.tab.c"
+#line 1195 "y.tab.c"
 
       default: break;
     }
@@ -1375,7 +1385,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 47 "reee.y"
+#line 51 "reee.y"
 
 
 //#include "lex.yy.c"

@@ -10,10 +10,13 @@
 
 %option stack noyywrap
 
-%x NEXT_PREDICATE NEXT_OBJECT NEXT_OBJECT_NAME END
+%x NEXT_PREDICATE NEXT_OBJECT NEXT_OBJECT_NAME END COMMENT
 
 %%
 
+^#                                        { BEGIN COMMENT; }
+<COMMENT>.                                { ; }
+<COMMENT>\n|\r                            { BEGIN INITIAL; }
 [ ]+|\n                                   { ; }
 :[A-Za-z0-9_]+                            { yylval.str_val = strdup(yytext+1); BEGIN NEXT_PREDICATE; return SUBJECT; }
 
@@ -26,7 +29,7 @@
 <NEXT_OBJECT>[A-Za-z0-9]*:[A-Za-z0-9]+    { yylval.str_val = strdup(yytext); BEGIN END; return OBJECT; }
 
 <NEXT_OBJECT_NAME>[ ]+|\n                 { ; }
-<NEXT_OBJECT_NAME>:[A-Za-z0-9]+           { yylval.str_val = strdup(yytext+1); BEGIN END; return OBJECT; }
+<NEXT_OBJECT_NAME>:[A-Za-z0-9_]+           { yylval.str_val = strdup(yytext+1); BEGIN END; return OBJECT; }
 
 <END>[ ]+|\n                              { ; }
 <END>"."                                  { BEGIN INITIAL;        return yytext[0]; }
