@@ -480,8 +480,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "reee.l"
-#line 2 "reee.l"
+#line 1 "tp2.l"
+#line 2 "tp2.l"
 /* Declaracoes C diversas */
 
 #include "yacc_aux.h"
@@ -726,7 +726,7 @@ YY_DECL
 		}
 
 	{
-#line 15 "reee.l"
+#line 15 "tp2.l"
 
 
 #line 732 "lex.yy.c"
@@ -789,98 +789,98 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 17 "reee.l"
+#line 17 "tp2.l"
 { BEGIN COMMENT; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 18 "reee.l"
+#line 18 "tp2.l"
 { ; }
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 19 "reee.l"
+#line 19 "tp2.l"
 { BEGIN INITIAL; }
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 20 "reee.l"
+#line 20 "tp2.l"
 { ; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 21 "reee.l"
+#line 21 "tp2.l"
 { yylval.str_val = strdup(yytext+1); BEGIN NEXT_PREDICATE; return SUBJECT; }
 	YY_BREAK
 case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
-#line 23 "reee.l"
+#line 23 "tp2.l"
 { ; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 24 "reee.l"
+#line 24 "tp2.l"
 { BEGIN NEXT_OBJECT; return PREDICATE_INIT; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 25 "reee.l"
+#line 25 "tp2.l"
 { BEGIN NEXT_OBJECT; return PREDICATE_GENDER; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 26 "reee.l"
+#line 26 "tp2.l"
 { yylval.str_val = strdup(yytext+1); BEGIN NEXT_OBJECT_NAME; return PREDICATE_RELATION; }
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 28 "reee.l"
+#line 28 "tp2.l"
 { ; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 29 "reee.l"
+#line 29 "tp2.l"
 { yylval.str_val = strdup(yytext); BEGIN END; return OBJECT; }
 	YY_BREAK
 case 12:
 /* rule 12 can match eol */
 YY_RULE_SETUP
-#line 31 "reee.l"
+#line 31 "tp2.l"
 { ; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 32 "reee.l"
+#line 32 "tp2.l"
 { yylval.str_val = strdup(yytext+1); BEGIN END; return OBJECT; }
 	YY_BREAK
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 34 "reee.l"
+#line 34 "tp2.l"
 { ; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 35 "reee.l"
+#line 35 "tp2.l"
 { BEGIN INITIAL;        return yytext[0]; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 36 "reee.l"
+#line 36 "tp2.l"
 { BEGIN NEXT_OBJECT;    return yytext[0]; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 37 "reee.l"
+#line 37 "tp2.l"
 { BEGIN NEXT_PREDICATE; return yytext[0]; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 39 "reee.l"
+#line 39 "tp2.l"
 ECHO;
 	YY_BREAK
 #line 886 "lex.yy.c"
@@ -1942,6 +1942,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 39 "reee.l"
+#line 39 "tp2.l"
 
 

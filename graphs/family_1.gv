@@ -1,0 +1,28 @@
+digraph Family
+{
+    node [shape=box,style=filled];
+    Bruno [color=lightblue];
+    Bruno -> Rosa [label="temMae"];
+    Bruno -> Angelica [label="temIrmao"];
+    Bruno -> Joao [label="temPai"];
+    Angelica [color=pink];
+    Angelica -> Rosa [label="temMae"];
+    Angelica -> Bruno [label="temIrmao"];
+    Angelica -> Joao [label="temPai"];
+    Maria [color=pink];
+    Maria -> Luzia [label="temMae"];
+    Maria -> Rosa [label="temIrmao"];
+    Maria -> Faustino [label="temPai"];
+    Rosa [color=pink];
+    Rosa -> Luzia [label="temMae"];
+    Rosa -> Maria [label="temIrmao"];
+    Rosa -> Faustino [label="temPai"];
+    Ricardo [color=lightblue];
+    Ricardo -> Maria [label="temMae"];
+    Ricardo -> Sara [label="temIrmao"];
+    Ricardo -> Jose [label="temPai"];
+    Sara [color=pink];
+    Sara -> Maria [label="temMae"];
+    Sara -> Ricardo [label="temIramo"];
+    Sara -> Jose [label="temPai"];
+}

@@ -9,8 +9,8 @@ GLIB =`pkg-config --cflags --libs glib-2.0`
 FLAGS = -Wall -Wextra -Wshadow -pedantic  $(GLIB) $(INCLUDE) #-Wno-unused-function -Wno-unused-parameter
 
 
-SRC_FLEX = reee.l
-SRC_YACC = reee.y
+SRC_FLEX = tp2.l
+SRC_YACC = tp2.y
 SRC = y.tab.c
 YACCC = yacc
 
@@ -19,7 +19,7 @@ SOURCE_DIR = source
 BUILD_DIR = build
 OUT_DIR = bin
 
-OUT = $(OUT_DIR)/reee
+OUT = $(OUT_DIR)/tp2
 
 SRCEXT = c
 
@@ -75,5 +75,7 @@ inst: all
 $(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.$(SRCEXT)
 	$(CC) $(FLAGS) -c $< -o $@ 
 
+$(OUT): $(OBJECTS)
+	$(CC) $(FLAGS) $^ -o $@
 
 # TODO: make install

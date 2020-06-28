@@ -126,3 +126,13 @@ void print_dot_tree(family_tree* fs)
     g_hash_table_foreach(fs, __family_print_entry, NULL);
     puts("}");
 }
+
+
+////////////// Induced relations //////////////
+
+void create_induced_relations(family_tree* fs)
+{
+    g_hash_table_foreach(fs, __entry, NULL);
+}
+
+///////////////////////////////////////////////

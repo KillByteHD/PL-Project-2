@@ -29,7 +29,7 @@
 <NEXT_OBJECT>[A-Za-z0-9]*:[A-Za-z0-9]+    { yylval.str_val = strdup(yytext); BEGIN END; return OBJECT; }
 
 <NEXT_OBJECT_NAME>[ ]+|\n                 { ; }
-<NEXT_OBJECT_NAME>:[A-Za-z0-9_]+           { yylval.str_val = strdup(yytext+1); BEGIN END; return OBJECT; }
+<NEXT_OBJECT_NAME>:[A-Za-z0-9_]+          { yylval.str_val = strdup(yytext+1); BEGIN END; return OBJECT; }
 
 <END>[ ]+|\n                              { ; }
 <END>"."                                  { BEGIN INITIAL;        return yytext[0]; }

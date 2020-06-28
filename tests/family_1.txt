@@ -1,0 +1,44 @@
+:Angelica rdf:type owl:NamedIndividual ,
+                      :Pessoa ;
+                      :temMae   :Rosa ;
+                      :temIrmao :Bruno ;
+                      :gender   :Female ;                      
+                      :temPai   :Joao .
+
+:Bruno rdf:type owl:NamedIndividual ,
+                   :Pessoa ;
+                   :temMae   :Rosa ;
+                   :gender   :Male ;
+                   :temIrmao :Angelica ; 
+                   :temPai :Joao .
+
+:Rosa rdf:type owl:NamedIndividual ,
+                  :Pessoa ;
+                  :temMae   :Luzia ;
+                  :temIrmao :Maria ; 
+                  :gender   :Female ;                      
+                  :temPai :Faustino .
+
+:Maria rdf:type owl:NamedIndividual ,
+                   :Pessoa ;
+                   :temMae   :Luzia ;
+                   :temIrmao :Rosa ; 
+                   :gender   :Female ;                      
+                   :temPai :Faustino .
+
+:Sara rdf:type owl:NamedIndividual ,
+                      :Pessoa ;
+                      :temMae   :Maria ;
+                      :gender   :Female ;
+                      :temIramo :Ricardo ;                      
+                      :temPai   :Jose .
+
+:Ricardo rdf:type owl:NamedIndividual ,
+                   :Pessoa ;
+                   :temMae   :Maria ;
+                   :gender   :Male ;
+                   :temIrmao :Sara ; 
+                   :temPai :Jose .
+
+:Jose rdf:type owl:NamedIndividual ,
+                      :Pessoa .
