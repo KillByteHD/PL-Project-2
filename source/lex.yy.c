@@ -489,9 +489,10 @@ char *yytext;
 #include <ctype.h> 
 #include <string.h>
 
-#line 492 "lex.yy.c"
+int object_aux = 0;
+#line 493 "lex.yy.c"
 
-#line 494 "lex.yy.c"
+#line 495 "lex.yy.c"
 
 #define INITIAL 0
 #define NEXT_PREDICATE 1
@@ -726,10 +727,10 @@ YY_DECL
 		}
 
 	{
-#line 15 "tp2.l"
+#line 16 "tp2.l"
 
 
-#line 732 "lex.yy.c"
+#line 733 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -789,101 +790,101 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 17 "tp2.l"
+#line 18 "tp2.l"
 { BEGIN COMMENT; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 18 "tp2.l"
+#line 19 "tp2.l"
 { ; }
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 19 "tp2.l"
+#line 20 "tp2.l"
 { BEGIN INITIAL; }
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 20 "tp2.l"
+#line 21 "tp2.l"
 { ; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 21 "tp2.l"
+#line 22 "tp2.l"
 { yylval.str_val = strdup(yytext+1); BEGIN NEXT_PREDICATE; return SUBJECT; }
 	YY_BREAK
 case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
-#line 23 "tp2.l"
+#line 24 "tp2.l"
 { ; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 24 "tp2.l"
+#line 25 "tp2.l"
 { BEGIN NEXT_OBJECT; return PREDICATE_INIT; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 25 "tp2.l"
+#line 26 "tp2.l"
 { BEGIN NEXT_OBJECT; return PREDICATE_GENDER; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 26 "tp2.l"
+#line 27 "tp2.l"
 { yylval.str_val = strdup(yytext+1); BEGIN NEXT_OBJECT_NAME; return PREDICATE_RELATION; }
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 28 "tp2.l"
+#line 29 "tp2.l"
 { ; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 29 "tp2.l"
-{ yylval.str_val = strdup(yytext); BEGIN END; return OBJECT; }
+#line 30 "tp2.l"
+{ object_aux = 0; yylval.str_val = strdup(yytext); BEGIN END; return OBJECT; }
 	YY_BREAK
 case 12:
 /* rule 12 can match eol */
 YY_RULE_SETUP
-#line 31 "tp2.l"
+#line 32 "tp2.l"
 { ; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 32 "tp2.l"
-{ yylval.str_val = strdup(yytext+1); BEGIN END; return OBJECT; }
+#line 33 "tp2.l"
+{ object_aux = 1; yylval.str_val = strdup(yytext+1); BEGIN END; return OBJECT; }
 	YY_BREAK
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 34 "tp2.l"
+#line 35 "tp2.l"
 { ; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 35 "tp2.l"
+#line 36 "tp2.l"
 { BEGIN INITIAL;        return yytext[0]; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 36 "tp2.l"
-{ BEGIN NEXT_OBJECT;    return yytext[0]; }
+#line 37 "tp2.l"
+{ if(object_aux) { BEGIN NEXT_OBJECT_NAME; } else { BEGIN NEXT_OBJECT; }    return yytext[0]; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 37 "tp2.l"
+#line 38 "tp2.l"
 { BEGIN NEXT_PREDICATE; return yytext[0]; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 39 "tp2.l"
+#line 40 "tp2.l"
 ECHO;
 	YY_BREAK
-#line 886 "lex.yy.c"
+#line 887 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(NEXT_PREDICATE):
 case YY_STATE_EOF(NEXT_OBJECT):
@@ -1942,6 +1943,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 39 "tp2.l"
+#line 40 "tp2.l"
 
 

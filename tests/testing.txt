@@ -1,0 +1,10 @@
+:Jose_Faria rdf:type owl:NamedIndividual . 
+:Jose_Faria rdf:type :Pessoa .
+:Jose_Faria :gender :Male .
+:Jose_Faria :temMae :Maria .
+
+
+:Andre_Faria rdf:type owl:NamedIndividual . 
+:Andre_Faria rdf:type :Pessoa .
+:Andre_Faria :gender :Male .
+:Andre_Faria :temMae :Maria .

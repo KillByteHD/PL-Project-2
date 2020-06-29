@@ -32,9 +32,9 @@ Lines : Lines Line
 
 Line : Triplets '.'
 
-Triplets : SUBJECT PREDICATE OBJECT       { ; }
-         | Triplets ',' OBJECT            { ; }
-         | Triplets ';' PREDICATE OBJECT  { ; }
+Triplets : SUBJECT PREDICATE OBJECT      
+         | Triplets ',' OBJECT           
+         | Triplets ';' PREDICATE OBJECT 
          ;
 
 %%

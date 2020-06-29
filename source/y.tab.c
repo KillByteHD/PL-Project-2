@@ -73,6 +73,7 @@
 #include <strings.h>
 #include <stdlib.h>
 #include "yacc_aux.h"
+#include <stdbool.h>
 
 
 int yylex(void);
@@ -82,7 +83,7 @@ int yyerror(const char *s);
 family_tree* fam = NULL;
 
 
-#line 86 "y.tab.c"
+#line 87 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -148,14 +149,14 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 17 "tp2.y"
+#line 18 "tp2.y"
 
     char* str_val;
     uint8_t u8_val;
     pred_type pred_val;
     triplet_aux triplet_val;
 
-#line 159 "y.tab.c"
+#line 160 "y.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -556,8 +557,8 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINEYYN -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    33,    33,    34,    37,    39,    40,    41,    45,    46,
-      47
+       0,    34,    34,    35,    38,    40,    41,    42,    46,    47,
+      48
 };
 #endif
 
@@ -1149,43 +1150,43 @@ yyreduce:
   switch (yyn)
     {
   case 5:
-#line 39 "tp2.y"
+#line 40 "tp2.y"
                                           { (yyval.triplet_val) = triplet_ctor( (yyvsp[-2].str_val) , (yyvsp[-1].pred_val) , (yyvsp[0].str_val) );                  handle_predicate_action(fam, (yyval.triplet_val).subject, (yyval.triplet_val).predicate, (yyval.triplet_val).object); }
-#line 1155 "y.tab.c"
+#line 1156 "y.tab.c"
     break;
 
   case 6:
-#line 40 "tp2.y"
+#line 41 "tp2.y"
                                           { (yyval.triplet_val) = triplet_ctor( (yyvsp[-2].triplet_val).subject , (yyvsp[-2].triplet_val).predicate , (yyvsp[0].str_val)); handle_predicate_action(fam, (yyval.triplet_val).subject, (yyval.triplet_val).predicate, (yyval.triplet_val).object); }
-#line 1161 "y.tab.c"
+#line 1162 "y.tab.c"
     break;
 
   case 7:
-#line 41 "tp2.y"
+#line 42 "tp2.y"
                                           { (yyval.triplet_val) = triplet_ctor( (yyvsp[-3].triplet_val).subject , (yyvsp[-1].pred_val), (yyvsp[0].str_val));            handle_predicate_action(fam, (yyval.triplet_val).subject, (yyval.triplet_val).predicate, (yyval.triplet_val).object); }
-#line 1167 "y.tab.c"
+#line 1168 "y.tab.c"
     break;
 
   case 8:
-#line 45 "tp2.y"
+#line 46 "tp2.y"
                                 { (yyval.pred_val) = (pred_type) { .pred_type = PRED_INIT_IDX       , .string = NULL       }; }
-#line 1173 "y.tab.c"
+#line 1174 "y.tab.c"
     break;
 
   case 9:
-#line 46 "tp2.y"
+#line 47 "tp2.y"
                                 { (yyval.pred_val) = (pred_type) { .pred_type = PRED_GENDER_IDX     , .string = NULL       }; }
-#line 1179 "y.tab.c"
+#line 1180 "y.tab.c"
     break;
 
   case 10:
-#line 47 "tp2.y"
+#line 48 "tp2.y"
                                 { (yyval.pred_val) = (pred_type) { .pred_type = PRED_RELATION_IDX   , .string = strdup((yyvsp[0].str_val)) }; }
-#line 1185 "y.tab.c"
+#line 1186 "y.tab.c"
     break;
 
 
-#line 1189 "y.tab.c"
+#line 1190 "y.tab.c"
 
       default: break;
     }
@@ -1390,13 +1391,16 @@ int yyerror(const char *s)
     return 1;
 }
 
-int main()
+int main(int argc, const char** argv)
 {
+    bool induced_relations = (argc == 2) && !strcmp(argv[1],"--induced-relations");
+
     fam = init_family_tree();
 
-    //printf("Begin!\n");
     yyparse();
-    //printf("End!\n");
+
+    if(induced_relations)
+        create_induced_relations(fam);
 
     print_dot_tree(fam);
     //free_family_tree(fam);

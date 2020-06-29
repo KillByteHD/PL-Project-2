@@ -3,6 +3,7 @@
 #include <strings.h>
 #include <stdlib.h>
 #include "yacc_aux.h"
+#include <stdbool.h>
 
 
 int yylex(void);
@@ -47,7 +48,6 @@ Predicate : PREDICATE_INIT      { $$ = (pred_type) { .pred_type = PRED_INIT_IDX 
           | PREDICATE_RELATION  { $$ = (pred_type) { .pred_type = PRED_RELATION_IDX   , .string = strdup($1) }; }
           ;
 
-
 %%
 
 //#include "lex.yy.c"
@@ -58,13 +58,16 @@ int yyerror(const char *s)
     return 1;
 }
 
-int main()
+int main(int argc, const char** argv)
 {
+    bool induced_relations = (argc == 2) && !strcmp(argv[1],"--induced-relations");
+
     fam = init_family_tree();
 
-    //printf("Begin!\n");
     yyparse();
-    //printf("End!\n");
+
+    if(induced_relations)
+        create_induced_relations(fam);
 
     print_dot_tree(fam);
     //free_family_tree(fam);

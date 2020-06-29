@@ -76,7 +76,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 17 "tp2.y"
+#line 18 "tp2.y"
 
     char* str_val;
     uint8_t u8_val;

@@ -1,0 +1,10 @@
+digraph Family
+{
+    node [shape=box,style=filled];
+    Jose_Faria [color=lightblue];
+    Jose_Faria -> Maria [label="temMae"];
+    Jose_Faria -> Andre_Faria [label="temIrmao"];
+    Andre_Faria [color=lightblue];
+    Andre_Faria -> Maria [label="temMae"];
+    Andre_Faria -> Jose_Faria [label="temIrmao"];
+}

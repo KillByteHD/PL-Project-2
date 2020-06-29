@@ -130,9 +130,73 @@ void print_dot_tree(family_tree* fs)
 
 ////////////// Induced relations //////////////
 
+
+
+
+
+struct __name_and_mother
+{
+    char* name;
+    char* mother;
+    family_tree* fam; // Glib foreach doesnt know itself
+    char* it_name; // When searching siblings name is stored here
+};
+
+static void __make_sibling_if_same_mother(void* data, void* user_data)
+{
+    struct __name_and_mother* nnm = (struct __name_and_mother*) user_data;
+    const relation* tmp = (relation*) data;
+    if(nnm->mother && strcmp(nnm->mother, tmp->target) == 0)
+    {
+        /* add this one as sibbling  */
+        add_person_relation(nnm->fam, nnm->name, "temIrmao", nnm->it_name);
+    }
+}
+
+
+static void __make_sibling_with_same_mother(void* key, void* value, void* user_data)
+{
+    struct __name_and_mother* nnm = (struct __name_and_mother*) user_data;
+    char* name = (char*) key;
+    const person_data* tmp = (person_data*) value;
+
+    if( strcmp(nnm->name, name) != 0 )
+    {
+        nnm->it_name = name;
+        g_ptr_array_foreach(tmp->relations, __make_sibling_if_same_mother, nnm);
+    }
+}
+
+
+static void __find_momma(void* data, void* user_data)
+{
+    relation* tmp = (relation*) data;
+    struct __name_and_mother* nnm = (struct __name_and_mother*) user_data;
+    if( strcmp(tmp->name, "temMae") == 0)
+    {
+        nnm->mother = tmp->target;
+    }
+}
+
+
+static void __foreach_entry_induce_siblings(void* key, void* value, void* user_data)
+{
+    struct __name_and_mother* nnm = (struct __name_and_mother*) user_data;
+    char* name = (char*) key;
+    const person_data* tmp = (person_data*) value;
+    nnm->name = name;
+    nnm->mother = NULL;
+    g_ptr_array_foreach(tmp->relations, __find_momma, nnm);
+
+    g_hash_table_foreach(nnm->fam, __make_sibling_with_same_mother, nnm);
+}
+
 void create_induced_relations(family_tree* fs)
 {
-    g_hash_table_foreach(fs, __entry, NULL);
+    struct __name_and_mother nnm = (struct __name_and_mother) { .name=NULL, .mother=NULL, .fam=fs };
+
+    g_hash_table_foreach(fs, __foreach_entry_induce_siblings, &nnm);
+
 }
 
 ///////////////////////////////////////////////

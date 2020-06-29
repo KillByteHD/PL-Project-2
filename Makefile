@@ -68,8 +68,8 @@ graph:
 # Builds the '.gv' in the graphs folder and makes the '.pdf' file with the graph in the same folder
 # USAGE: make graph GRAPH=family
 inst: all
-	./$(OUT) < tests/$(TEST).txt > graphs/$(TEST).gv && make graph GRAPH=graphs/$(TEST) && code graphs/$(TEST).pdf
-
+	./$(OUT)  < tests/$(TEST).txt > graphs/$(TEST).gv && make graph GRAPH=graphs/$(TEST) && code graphs/$(TEST).pdf
+#--induced-relations 
 
 # Auxiliar object file build rule
 $(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.$(SRCEXT)

@@ -49,4 +49,6 @@ void print_dot_tree(family_tree*);
 
 //void print_dot_tree(family_tree*);
 
+void create_induced_relations(family_tree* fs);
+
 #endif // FAMILY_H

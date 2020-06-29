@@ -19,18 +19,20 @@ void handle_init(family_tree* fam, const char* subj, const char* __unnamed__ , c
 void handle_gender(family_tree* fam, const char* subj, const char* __unnamed__ , const char* obj)
 {
     (void) __unnamed__;
-    if(strcmp(obj,":Male") == 0)
+    if (get_person_data(fam, subj) != NULL)
     {
-        set_person_gender(fam, subj, MALE);
+        if(strcmp(obj,":Male") == 0)
+        {
+            set_person_gender(fam, subj, MALE);
+            return;
+        }
+        else if(strcmp(obj,":Female") == 0)
+        {
+            set_person_gender(fam, subj, FEMALE);
+            return;
+        }
     }
-    else if(strcmp(obj,":Female") == 0)
-    {
-        set_person_gender(fam, subj, FEMALE);
-    }
-    else
-    {
-        /* Gender error handling */
-    }
+
 }
 
 void handle_relation(family_tree* fam, const char* subj, const char* rel_name , const char* obj)
